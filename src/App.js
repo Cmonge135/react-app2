@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import Image from './img/logo.png';
 import styled from 'styled-components';
+import {IncreaseBtn, DecreaseBtn, CheckBtn, GenerateBtn} from './components/buttons';
 
 const App = () => {
   return (
@@ -14,18 +15,30 @@ const App = () => {
         <Row>
           <label>How Many Characters:</label>
           <Controls>
-            <Btn>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-dash-lg" viewBox="0 0 16 16">
-                  <path fillRule="evenodd" d="M2 8a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11A.5.5 0 0 1 2 8Z"/>
-              </svg>
-            </Btn>
+            <DecreaseBtn />
             <span>0</span>
-            <Btn>
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-plus-lg" viewBox="0 0 16 16">
-                  <path fillRule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-              </svg>
-            </Btn>
+            <IncreaseBtn />
           </Controls>
+        </Row>
+        <Row>
+          <label>Include Symbols?</label>
+          <CheckBtn />
+        </Row>
+        <Row>
+          <label>Include Numbers?</label>
+          <CheckBtn />
+        </Row>
+        <Row>
+          <label>Include Uppercase?</label>
+          <CheckBtn />
+        </Row>
+        <Row>
+          <label>Include Lowercase?</label>
+          <CheckBtn />
+        </Row>
+        <Row>
+          <GenerateBtn />
+          <Input type="text" readOnly="true"/>
         </Row>
       </form>
     </div>
@@ -65,23 +78,26 @@ const Controls = styled.div`
   }
 `;
 
-const Btn = styled.button`
+const Input = styled.input`
   width: 100%;
-  background: #684bff;
-  color: #fff;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  height: 40px;
-  vertical-align: top;
-  font-size: 18px;
-  text-align: center;
-  border: none;
+  background: none;
   border-radius: 4px;
+  border: 1px solid rgba(255,255,255,.25);
+  color: #fff;
+  height: 40px;
+  line-height: 40px;
   cursor: pointer;
   transition: all .3s ease;
 
   &:hover {
-    background: #866ffd;
+    border: 1px solid rgba(255,255,255,.50);
+  }
+
+  &::selection {
+    background: #212139;
+  }
+
+  &::-moz-selection {
+    background: #212139;
   }
 `;
