@@ -1,39 +1,71 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './App.css';
 import Image from './img/logo.png';
 import styled from 'styled-components';
 import {IncreaseBtn, DecreaseBtn, CheckBtn, GenerateBtn} from './components/buttons';
 
 const App = () => {
+  const [config, changeConfig] = useState({
+    charNum: 8,
+    lowercase: true,
+    uppercase: true,
+    numbers: true,
+    symbols: true
+  });
+
+  const increaseChar = () => {
+    if(config.charNum < 16){
+      changeConfig((oldConfig) => {
+        const newConfig = {...oldConfig};
+        newConfig.charNum += 1;
+        return newConfig;
+      });
+    }
+  }
+
+  const decreaseChar = () => {
+    if(config.charNum > 1){
+      changeConfig((oldConfig) => {
+        const newConfig = {...oldConfig};
+        newConfig.charNum -= 1;
+        return newConfig;
+      });
+    }
+  }
+
+  const onSubmit = (e) => {
+    e.preventDefault();
+  }
+
   return (
     <div className="container">
       <Logo>
         <img src={Image} alt="" />
       </Logo>
 
-      <form>
+      <form onSubmit={onSubmit}>
         <Row>
-          <label>How Many Characters:</label>
+          <label>Characters:</label>
           <Controls>
-            <DecreaseBtn />
-            <span>0</span>
-            <IncreaseBtn />
+            <DecreaseBtn click={decreaseChar} />
+            <span>{config.charNum}</span>
+            <IncreaseBtn click={increaseChar} />
           </Controls>
         </Row>
         <Row>
-          <label>Include Symbols?</label>
+          <label>Symbols?</label>
           <CheckBtn />
         </Row>
         <Row>
-          <label>Include Numbers?</label>
+          <label>Numbers?</label>
           <CheckBtn />
         </Row>
         <Row>
-          <label>Include Uppercase?</label>
+          <label>Uppercase?</label>
           <CheckBtn />
         </Row>
         <Row>
-          <label>Include Lowercase?</label>
+          <label>Lowercase?</label>
           <CheckBtn />
         </Row>
         <Row>
