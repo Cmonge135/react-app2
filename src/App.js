@@ -33,6 +33,38 @@ const App = () => {
     }
   }
 
+  const toggleSymbols = () => {
+    changeConfig((oldConfig) => {
+      const newConfig = {...oldConfig};
+      newConfig.symbols = !newConfig.symbols;
+      return newConfig;
+    });
+  }
+
+  const toggleNumbers = () => {
+    changeConfig((oldConfig) => {
+      const newConfig = {...oldConfig};
+      newConfig.numbers = !newConfig.numbers;
+      return newConfig;
+    });
+  }
+
+  const toggleUppercase = () => {
+    changeConfig((oldConfig) => {
+      const newConfig = {...oldConfig};
+      newConfig.uppercase = !newConfig.uppercase;
+      return newConfig;
+    });
+  }
+
+  const toggleLowercase = () => {
+    changeConfig((oldConfig) => {
+      const newConfig = {...oldConfig};
+      newConfig.lowercase = !newConfig.lowercase;
+      return newConfig;
+    });
+  }
+
   const onSubmit = (e) => {
     e.preventDefault();
   }
@@ -54,19 +86,19 @@ const App = () => {
         </Row>
         <Row>
           <label>Symbols?</label>
-          <CheckBtn />
+          <CheckBtn selected={config.symbols} click={toggleSymbols} />
         </Row>
         <Row>
           <label>Numbers?</label>
-          <CheckBtn />
+          <CheckBtn selected={config.numbers} click={toggleNumbers} />
         </Row>
         <Row>
           <label>Uppercase?</label>
-          <CheckBtn />
+          <CheckBtn selected={config.uppercase} click={toggleUppercase} />
         </Row>
         <Row>
           <label>Lowercase?</label>
-          <CheckBtn />
+          <CheckBtn selected={config.lowercase} click={toggleLowercase} />
         </Row>
         <Row>
           <GenerateBtn />
