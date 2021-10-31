@@ -1,8 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './App.css';
 import Image from './img/logo.png';
 import styled from 'styled-components';
 import {IncreaseBtn, DecreaseBtn, CheckBtn, GenerateBtn} from './components/buttons';
+import genPass from './functions/genPass';
 
 const App = () => {
   const [config, changeConfig] = useState({
@@ -12,6 +13,12 @@ const App = () => {
     numbers: true,
     symbols: true
   });
+
+  const [generatedPassword, changeGeneratedPassword] = useState('');
+
+  useEffect(() => {
+    changeGeneratedPassword(genPass(config));
+  }, [config]);
 
   const increaseChar = () => {
     if(config.charNum < 16){
@@ -67,6 +74,8 @@ const App = () => {
 
   const onSubmit = (e) => {
     e.preventDefault();
+
+    changeGeneratedPassword(genPass(config));
   }
 
   return (
@@ -102,7 +111,7 @@ const App = () => {
         </Row>
         <Row>
           <GenerateBtn />
-          <Input type="text" readOnly="true"/>
+          <Input type="text" readOnly={true} value={generatedPassword}/>
         </Row>
       </form>
     </div>
